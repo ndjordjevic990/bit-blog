@@ -9,16 +9,18 @@ const Header = () => {
     <>
       <Navbar bg="primary" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+          <Link to="/">
+            <span>BIT BLOG</span>
+          </Link>
           <Nav className="me-auto">
             <Link to="/">
-              <Nav.Link href="#home">Home</Nav.Link>
+              <span>Home</span>
             </Link>
             <Link to="/authors">
-              <Nav.Link href="#authors">Authors</Nav.Link>
+              <span>Authors</span>
             </Link>
             <Link to="/about">
-              <Nav.Link href="#about">About</Nav.Link>
+              <span>About</span>
             </Link>
           </Nav>
         </Container>
