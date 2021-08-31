@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { fetchSinglePosts, fetchAuthorsInfo } from "../../services/fetch";
+import {
+  fetchSinglePosts,
+  fetchAuthorsInfo,
+  getMorePosts,
+} from "../../services/fetch";
 import Container from "react-bootstrap/Container";
+import { Link } from "react-router-dom";
 
 const SinglePost = (props) => {
   const [singPost, setSinglePost] = useState([]);
   const [singUser, setSingUser] = useState({});
+  const [morePosts, setMorePosts] = useState([]);
   const id = props.match.params.id;
 
   useEffect(() => {
@@ -15,8 +21,11 @@ const SinglePost = (props) => {
       })
       .then((userId) => {
         fetchAuthorsInfo(userId).then((user) => {
-          console.log(user);
           setSingUser(user);
+        });
+
+        getMorePosts(userId).then((postsArr) => {
+          setMorePosts(postsArr);
         });
       });
   }, [id]);
@@ -24,17 +33,21 @@ const SinglePost = (props) => {
   return (
     <Container>
       <h3>SINGLE POST TITLE {id}</h3>
-      <h4>{singUser.name}</h4>
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Est eius
-        eligendi voluptates ad qui natus pariatur! Sunt at provident deleniti
-        accusamus similique. Quidem provident et quasi a laborum! Dicta,
-        doloribus? Voluptatum iusto, tempore, placeat vel quo inventore ea
-        quibusdam sed incidunt corrupti hic illo nemo ratione, temporibus qui
-        voluptas voluptatem autem. Quisquam tempore illo hic quod dolorum
-        quaerat quis nulla.
-      </div>
+      <Link to={`/users/${singUser.id}`}>
+        <h3>{singUser.name}</h3>
+      </Link>
+      <div>{singPost.body}</div>
       <hr />
+      <div>
+        <h5>3 more posts from same author</h5>
+        {morePosts.map((morePost) => {
+          return (
+            <Link className="text-decoration-none" to={`/posts/${morePost.id}`}>
+              <p>Title {morePost.id}</p>
+            </Link>
+          );
+        })}
+      </div>
     </Container>
   );
 };

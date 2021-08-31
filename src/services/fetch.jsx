@@ -28,10 +28,19 @@ const fetchAuthorsPosts = (userId) => {
   ).then((response) => response.json());
 };
 
+const getMorePosts = (userId) => {
+  return fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
+    .then((response) => response.json())
+    .then((userPosts) => {
+      return userPosts.sort(() => 0.5 - Math.random()).slice(0, 3);
+    });
+};
+
 export {
   fetchPosts,
   fetchAuthors,
   fetchSinglePosts,
   fetchAuthorsPosts,
   fetchAuthorsInfo,
+  getMorePosts,
 };

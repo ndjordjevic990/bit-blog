@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchAuthors } from "../../services/fetch";
+import { Link } from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
 
@@ -14,11 +15,12 @@ const Authors = () => {
 
   return (
     <Container>
-      {console.log(authors)}
       <h3>AUTHORS</h3>
-      {authors.map((user, i) => (
-        <div>
-          <h3>{user.name}</h3>
+      {authors.map((user) => (
+        <div key={user.id}>
+          <Link to={`/users/${user.id}`}>
+            <h3>{user.name}</h3>
+          </Link>
           <hr />
         </div>
       ))}

@@ -4,6 +4,7 @@ import Home from "./Home/Home";
 import Authors from "./Authors/Authors";
 import About from "./About/About";
 import SinglePost from "./Posts/SinglePost";
+import SingleAuthor from "./Authors/SingleAuthor";
 import { Switch, Route } from "react-router-dom";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/authors" component={Authors} />
         <Route exact path="/about" component={About} />
         <Route exact path="/posts/:id" component={SinglePost} />
+        <Route exact path="/users/:id" component={SingleAuthor} />
       </Switch>
     </div>
   );
